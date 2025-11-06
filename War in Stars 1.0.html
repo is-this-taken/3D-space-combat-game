@@ -1,0 +1,2233 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+ρσ_modules.pythonize = {};
+ρσ_modules.random = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+
+(function(){
+    var ρσ_seed_state, ρσ_get_random_byte;
+    ρσ_seed_state = (function(){
+        var ρσ_d = {};
+        ρσ_d["key"] = ρσ_list_decorate([]);
+        ρσ_d["key_i"] = 0;
+        ρσ_d["key_j"] = 0;
+        return ρσ_d;
+    }).call(this);
+    ρσ_get_random_byte = (function() {
+        var ρσ_anonfunc = function () {
+            var ρσ_unpack;
+            ρσ_seed_state.key_i = (ρσ_seed_state.key_i + 1) % 256;
+            ρσ_seed_state.key_j = (ρσ_seed_state.key_j + (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)]) % 256;
+            ρσ_unpack = [(ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_j, ρσ_expr_temp)], 
+            (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)]];
+            (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)] = ρσ_unpack[0];
+            (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_j, ρσ_expr_temp)] = ρσ_unpack[1];
+            return (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(((ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)] + (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_j, ρσ_expr_temp)]) % 256, ρσ_expr_temp)];
+        };
+        if (!ρσ_anonfunc.__module__) Object.defineProperties(ρσ_anonfunc, {
+            __module__ : {value: "random"}
+        });
+        return ρσ_anonfunc;
+    })();
+    function seed() {
+        var x = (arguments[0] === undefined || ( 0 === arguments.length-1 && arguments[arguments.length-1] !== null && typeof arguments[arguments.length-1] === "object" && arguments[arguments.length-1] [ρσ_kwargs_symbol] === true)) ? seed.__defaults__.x : arguments[0];
+        var ρσ_kwargs_obj = arguments[arguments.length-1];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "x")){
+            x = ρσ_kwargs_obj.x;
+        }
+        var i, j, ρσ_unpack;
+        ρσ_seed_state.key_i = ρσ_seed_state.key_j = 0;
+        if (typeof x === "number") {
+            x = x.toString();
+        } else if (typeof x !== "string") {
+            throw new TypeError("unhashable type: '" + typeof x + "'");
+        }
+        for (var ρσ_Index1 = 0; ρσ_Index1 < 256; ρσ_Index1++) {
+            i = ρσ_Index1;
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i] = i;
+        }
+        j = 0;
+        for (var ρσ_Index2 = 0; ρσ_Index2 < 256; ρσ_Index2++) {
+            i = ρσ_Index2;
+            j = (j + (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i] + x.charCodeAt(i % x.length)) % 256;
+            ρσ_unpack = [(ρσ_expr_temp = ρσ_seed_state.key)[(typeof j === "number" && j < 0) ? ρσ_expr_temp.length + j : j], 
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i]];
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i] = ρσ_unpack[0];
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof j === "number" && j < 0) ? ρσ_expr_temp.length + j : j] = ρσ_unpack[1];
+        }
+    };
+    if (!seed.__defaults__) Object.defineProperties(seed, {
+        __defaults__ : {value: {x:(new Date).getTime()}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["x"]},
+        __module__ : {value: "random"}
+    });
+
+    seed();
+    function random() {
+        var n, m, i;
+        n = 0;
+        m = 1;
+        for (var ρσ_Index3 = 0; ρσ_Index3 < 8; ρσ_Index3++) {
+            i = ρσ_Index3;
+            n += ρσ_get_random_byte() * m;
+            m *= 256;
+        }
+        return n / 0x10000000000000000;
+    };
+    if (!random.__module__) Object.defineProperties(random, {
+        __module__ : {value: "random"}
+    });
+
+    function randrange() {
+        var start, stop, step, width, n;
+        if (arguments.length === 1) {
+            return randbelow(int(arguments[0]));
+        }
+        start = int(arguments[0]);
+        stop = int(arguments[1]);
+        if (arguments.length < 3) {
+            step = 1;
+        } else {
+            step = int(arguments[2]);
+        }
+        width = stop - start;
+        if (step === 1) {
+            if (width > 0) {
+                return start + randbelow(width);
+            }
+            throw new ValueError("empty range for randrange()");
+        }
+        if (step > 0) {
+            n = Math.floor((width + step - 1) / step);
+        } else if (step < 0) {
+            n = Math.floor((width + step + 1) / step);
+        } else {
+            throw new ValueError("zero step for randrange()");
+        }
+        if (n <= 0) {
+            throw new ValueError("empty range in randrange(" + ρσ_str.format("{}", start) + ", " + ρσ_str.format("{}", stop) + ", " + ρσ_str.format("{}", step) + ")");
+        }
+        return start + step * randbelow(n);
+    };
+    if (!randrange.__module__) Object.defineProperties(randrange, {
+        __module__ : {value: "random"}
+    });
+
+    function randint(a, b) {
+        return int(random() * (b - a + 1) + a);
+    };
+    if (!randint.__argnames__) Object.defineProperties(randint, {
+        __argnames__ : {value: ["a", "b"]},
+        __module__ : {value: "random"}
+    });
+
+    function uniform(a, b) {
+        return random() * (b - a) + a;
+    };
+    if (!uniform.__argnames__) Object.defineProperties(uniform, {
+        __argnames__ : {value: ["a", "b"]},
+        __module__ : {value: "random"}
+    });
+
+    function randbelow(n) {
+        return Math.floor(random() * n);
+    };
+    if (!randbelow.__argnames__) Object.defineProperties(randbelow, {
+        __argnames__ : {value: ["n"]},
+        __module__ : {value: "random"}
+    });
+
+    function choice(seq) {
+        if (seq.length > 0) {
+            return seq[ρσ_bound_index(randbelow(seq.length), seq)];
+        } else {
+            throw new IndexError;
+        }
+    };
+    if (!choice.__argnames__) Object.defineProperties(choice, {
+        __argnames__ : {value: ["seq"]},
+        __module__ : {value: "random"}
+    });
+
+    function shuffle() {
+        var x = ( 0 === arguments.length-1 && arguments[arguments.length-1] !== null && typeof arguments[arguments.length-1] === "object" && arguments[arguments.length-1] [ρσ_kwargs_symbol] === true) ? undefined : arguments[0];
+        var random_f = (arguments[1] === undefined || ( 1 === arguments.length-1 && arguments[arguments.length-1] !== null && typeof arguments[arguments.length-1] === "object" && arguments[arguments.length-1] [ρσ_kwargs_symbol] === true)) ? shuffle.__defaults__.random_f : arguments[1];
+        var ρσ_kwargs_obj = arguments[arguments.length-1];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "random_f")){
+            random_f = ρσ_kwargs_obj.random_f;
+        }
+        var j, ρσ_unpack, i;
+        for (var ρσ_Index4 = 0; ρσ_Index4 < x.length; ρσ_Index4++) {
+            i = ρσ_Index4;
+            j = Math.floor(random_f() * (i + 1));
+            ρσ_unpack = [x[(typeof j === "number" && j < 0) ? x.length + j : j], x[(typeof i === "number" && i < 0) ? x.length + i : i]];
+            x[(typeof i === "number" && i < 0) ? x.length + i : i] = ρσ_unpack[0];
+            x[(typeof j === "number" && j < 0) ? x.length + j : j] = ρσ_unpack[1];
+        }
+        return x;
+    };
+    if (!shuffle.__defaults__) Object.defineProperties(shuffle, {
+        __defaults__ : {value: {random_f:random}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["x", "random_f"]},
+        __module__ : {value: "random"}
+    });
+
+    function sample(population, k) {
+        var x, j, ρσ_unpack, i;
+        x = population.slice();
+        for (var ρσ_Index5 = population.length - 1; ρσ_Index5 > population.length - k - 1; ρσ_Index5-=1) {
+            i = ρσ_Index5;
+            j = Math.floor(random() * (i + 1));
+            ρσ_unpack = [x[(typeof j === "number" && j < 0) ? x.length + j : j], x[(typeof i === "number" && i < 0) ? x.length + i : i]];
+            x[(typeof i === "number" && i < 0) ? x.length + i : i] = ρσ_unpack[0];
+            x[(typeof j === "number" && j < 0) ? x.length + j : j] = ρσ_unpack[1];
+        }
+        return x.slice(population.length - k);
+    };
+    if (!sample.__argnames__) Object.defineProperties(sample, {
+        __argnames__ : {value: ["population", "k"]},
+        __module__ : {value: "random"}
+    });
+
+    ρσ_modules.random.ρσ_seed_state = ρσ_seed_state;
+    ρσ_modules.random.ρσ_get_random_byte = ρσ_get_random_byte;
+    ρσ_modules.random.seed = seed;
+    ρσ_modules.random.random = random;
+    ρσ_modules.random.randrange = randrange;
+    ρσ_modules.random.randint = randint;
+    ρσ_modules.random.uniform = uniform;
+    ρσ_modules.random.randbelow = randbelow;
+    ρσ_modules.random.choice = choice;
+    ρσ_modules.random.shuffle = shuffle;
+    ρσ_modules.random.sample = sample;
+})();
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    function round(num, n=0) {return Number(num.toFixed(n))}
+
+    var version, print, arange, __name__, type, ρσ_ls, winner;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    var random = ρσ_modules.random;
+
+    "4";
+    winner = "";
+    "5";
+    while (true) {
+        "6";
+        winner = (await game(winner));
+    }
+    "9";
+    async function game(winner) {
+        var ρσ_ls, pixelsInX, pixelsInY, scene, title, victory, play, howToPlay, DLC, selecting, a, b, c, d, e, f, pa, pos, pb, pc, pd, pe, pf, topFront, botFront, topBack, botBack, rad, lineA1, lineA2, lineA3, lineA4, lineC1, lineC2, lineC3, lineC4, frontRightL, rightBackL, backLeftL, leftFrontL, salvo, salvo2, intTor, shaft, flair, fire1, fire2, fire3, fire4, fire5, i, bridge1, bridge2, edges, ship, menuSelect, k, health, hit, hitOP, torDisplay, torTracker, torTrackerOP, heightFromTop, turn, turningMax, turnOrder, y, hitPointsTitle, hitPoints, torCountTitle, torCount, attack, reload, hitPointsTitleOP, hitPointsOP, torCountTitleOP, torCountOP, attackOP, reloadOP, intTorOP, visable, hitPoint, hitbox, hitboxOP, shadow, visableAxis, shipX, shipY, shipZ, collisionPoint, shipOP, shadowOP, visableAxisOP, shipXOP, shipYOP, shipZOP, collisionPointOP, space, space1, space2, space3, space4, space5, space6, tor, turnMaxX, turnMaxY, choice, turnMaxXOP, turnMaxYOP;
+        "11";
+        pixelsInX = 1650;
+        "12";
+        pixelsInY = 875;
+        "14";
+        scene = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({width: pixelsInX, height: pixelsInY})]);
+        "16";
+        scene.userzoom = false;
+        "17";
+        scene.userspin = false;
+        "18";
+        scene.userpan = false;
+        "21";
+        title = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(pixelsInX["/"](2), pixelsInY["-"](1["*"](100)), 0), text: "Wars in Stars", box: false, font: "monospace", height: 100})]);
+        "22";
+        victory = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(pixelsInX["/"](2), pixelsInY["-"](1["*"](180)), 0), text: winner, box: false, font: "monospace", height: 40})]);
+        "23";
+        play = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(150, pixelsInY["-"](1["*"](300)), 0), text: " Play ", box: false, font: "monospace", height: 70, align: "left"})]);
+        "24";
+        howToPlay = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(150, pixelsInY["-"](1["*"](400)), 0), text: " How To Play ", box: false, font: "monospace", height: 70, align: "left"})]);
+        "25";
+        DLC = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(150, pixelsInY["-"](1["*"](500)), 0), text: " DLC ", box: false, font: "monospace", height: 70, align: "left"})]);
+        "26";
+        selecting = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(200, 100, 0), text: "Use 'q' and 'e' to choose. Then use 'ENTER' to select", box: false, font: "monospace", height: 20, align: "left"})]);
+        "30";
+        a = ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(0, 20, 0)})]);
+        "31";
+        b = ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(0, 0, 50)})]);
+        "32";
+        c = ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(0, 1["-u"]()["*"](20), 0)})]);
+        "33";
+        d = ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(0, 0, 1["-u"]()["*"](50))})]);
+        "34";
+        e = ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(150, 0, 0)})]);
+        "35";
+        f = ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](30), 0, 0)})]);
+        "37";
+        pa = pos = vec(0, 20, 0);
+        "38";
+        pb = pos = vec(0, 0, 50);
+        "39";
+        pc = pos = vec(0, 1["-u"]()["*"](20), 0);
+        "40";
+        pd = pos = vec(0, 0, 1["-u"]()["*"](50));
+        "41";
+        pe = pos = vec(150, 0, 0);
+        "42";
+        pf = pos = vec(1["-u"]()["*"](30), 0, 0);
+        "45";
+        topFront = ρσ_interpolate_kwargs.call(this, quad, [ρσ_desugar_kwargs({v0: a, v1: b, v2: e, v3: d})]);
+        "46";
+        botFront = ρσ_interpolate_kwargs.call(this, quad, [ρσ_desugar_kwargs({v0: c, v1: b, v2: e, v3: d})]);
+        "47";
+        topBack = ρσ_interpolate_kwargs.call(this, quad, [ρσ_desugar_kwargs({v0: a, v1: b, v2: f, v3: d})]);
+        "48";
+        botBack = ρσ_interpolate_kwargs.call(this, quad, [ρσ_desugar_kwargs({v0: c, v1: b, v2: f, v3: d})]);
+        "50";
+        rad = 1;
+        "51";
+        lineA1 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pb["-"](1["*"](pa)), radius: rad})]);
+        "52";
+        lineA2 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pd["-"](1["*"](pa)), radius: rad})]);
+        "53";
+        lineA3 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pe["-"](1["*"](pa)), radius: rad})]);
+        "54";
+        lineA4 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pf["-"](1["*"](pa)), radius: rad})]);
+        "56";
+        lineC1 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pc, axis: pb["-"](1["*"](pc)), radius: rad})]);
+        "57";
+        lineC2 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pc, axis: pd["-"](1["*"](pc)), radius: rad})]);
+        "58";
+        lineC3 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pc, axis: pe["-"](1["*"](pc)), radius: rad})]);
+        "59";
+        lineC4 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pc, axis: pf["-"](1["*"](pc)), radius: rad})]);
+        "61";
+        frontRightL = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pe, axis: pb["-"](1["*"](pe)), radius: rad})]);
+        "62";
+        rightBackL = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pb, axis: pf["-"](1["*"](pb)), radius: rad})]);
+        "63";
+        backLeftL = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pf, axis: pd["-"](1["*"](pf)), radius: rad})]);
+        "64";
+        leftFrontL = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pd, axis: pe["-"](1["*"](pd)), radius: rad})]);
+        "67";
+        salvo = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(40, 10, 20), size: vec(25, 5, 10)})]);
+        "68";
+        salvo2 = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(40, 10, 1["-u"]()["*"](20)), size: vec(25, 5, 10)})]);
+        "70";
+        ρσ_interpolate_kwargs.call(salvo, salvo.rotate, [ρσ_desugar_kwargs({angle: 1["-u"]()["*"](pi)["/"](8), axis: pf["-"](1["*"](pe))})]);
+        "71";
+        ρσ_interpolate_kwargs.call(salvo, salvo.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]);
+        "72";
+        ρσ_interpolate_kwargs.call(salvo2, salvo2.rotate, [ρσ_desugar_kwargs({angle: pi["/"](8), axis: pf["-"](1["*"](pe))})]);
+        "73";
+        ρσ_interpolate_kwargs.call(salvo2, salvo2.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]);
+        "75";
+        intTor = ρσ_list_decorate([]);
+        "76";
+        for (var ρσ_Index6 = 0; ρσ_Index6["<"](4); ρσ_Index6++) {
+            i = ρσ_Index6;
+            "77";
+            shaft = ρσ_interpolate_kwargs.call(this, ellipsoid, [ρσ_desugar_kwargs({length: 20, width: 2.5, height: 2.5, color: vec(.7, .7, .7)})]);
+            "78";
+            flair = ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 0, 0), size: vector(5, 2.5, 2.5), color: vec(.7, .7, .7)})]);
+            "79";
+            fire1 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 0, 0), radius: .5, color: color.red})]);
+            "80";
+            fire2 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), .5, .5), radius: .5, color: color.red})]);
+            "81";
+            fire3 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 1["-u"]()["*"](.5), .5), radius: .5, color: color.red})]);
+            "82";
+            fire4 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), .5, 1["-u"]()["*"](.5)), radius: .5, color: color.red})]);
+            "83";
+            fire5 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 1["-u"]()["*"](.5), 1["-u"]()["*"](.5)), radius: .5, color: color.red})]);
+            "84";
+            ρσ_setitem(intTor, i, compound(ρσ_list_decorate([ shaft, flair, fire1, fire2, fire3, fire4, fire5 ])));
+        }
+        "86";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 0), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: 1["-u"]()["*"](pi)["/"](8), axis: pf["-"](1["*"](pe))})]));
+        "87";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 0), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]));
+        "88";
+        ρσ_getitem(intTor, 0).pos = vec(45, 8.5, 22);
+        "90";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 1), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: 1["-u"]()["*"](pi)["/"](8), axis: pf["-"](1["*"](pe))})]));
+        "91";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 1), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]));
+        "92";
+        ρσ_getitem(intTor, 1).pos = vec(45, 10, 18);
+        "95";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 2), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](8), axis: pf["-"](1["*"](pe))})]));
+        "96";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 2), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]));
+        "97";
+        ρσ_getitem(intTor, 2).pos = vec(45, 8.5, 1["-u"]()["*"](22));
+        "99";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 3), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](8), axis: pf["-"](1["*"](pe))})]));
+        "100";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 3), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]));
+        "101";
+        ρσ_getitem(intTor, 3).pos = vec(45, 10, 1["-u"]()["*"](18));
+        "103";
+        bridge1 = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(0, 22.5, 0), size: vector(7, 15, 10)})]);
+        "104";
+        bridge2 = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(0, 35, 0), size: vector(10, 10, 30)})]);
+        "109";
+        edges = compound(ρσ_list_decorate([ lineA1, lineA2, lineA3, lineA4, lineC1, lineC2, lineC3, lineC4, frontRightL, leftFrontL, rightBackL, backLeftL ]));
+        "110";
+        edges.color = color.green;
+        "111";
+        ship = compound(ρσ_list_decorate([ topFront, botFront, topBack, botBack, bridge1, bridge2, edges, salvo, salvo2 ]));
+        "112";
+        ship.pos=ship.pos["+"](vec(50, 0, 200));
+        "113";
+        ρσ_interpolate_kwargs.call(ship, ship.rotate, [ρσ_desugar_kwargs({angle: pi["*"](.8), axis: vec(0, 1["-u"]()["*"](1), 0)})]);
+        "114";
+        for (var ρσ_Index7 = 0; ρσ_Index7["<"](4); ρσ_Index7++) {
+            i = ρσ_Index7;
+            "115";
+            ρσ_getitem(intTor, i).pos=ρσ_getitem(intTor, i).pos["+"](vec(50, 0, 200));
+            "116";
+            (ρσ_expr_temp = ρσ_getitem(intTor, i), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["*"](.8), axis: vec(0, 1["-u"]()["*"](1), 0), origin: ship.pos})]));
+        }
+        "119";
+        menuSelect = 1;
+        "120";
+        while (true) {
+            "121";
+            (await rate(100));
+            "122";
+            title.visible = true;
+            "123";
+            play.visible = true;
+            "124";
+            howToPlay.visible = true;
+            "125";
+            DLC.visible = true;
+            "126";
+            selecting.visible = true;
+            "127";
+            ship.visible = true;
+            "128";
+            victory.visible = true;
+            "129";
+            for (var ρσ_Index8 = 0; ρσ_Index8["<"](4); ρσ_Index8++) {
+                i = ρσ_Index8;
+                "130";
+                ρσ_getitem(intTor, i).visible = true;
+            }
+            "131";
+            k = (await keysdown());
+            "132";
+            if (ρσ_in("q", k)) {
+                "133";
+                (await scene.waitfor("keyup"));
+                "134";
+                if (menuSelect[">"](1)) {
+                    "135";
+                    menuSelect=menuSelect["-"](1);
+                    "136";
+                }
+            }
+            if (ρσ_in("e", k)) {
+                "137";
+                (await scene.waitfor("keyup"));
+                "138";
+                if (menuSelect["<"](3)) {
+                    "139";
+                    menuSelect=menuSelect["+"](1);
+                    "140";
+                }
+            }
+            if ((menuSelect === 1 || typeof menuSelect === "object" && ρσ_equals(menuSelect, 1))) {
+                "141";
+                play.text = "[Play]";
+                "142";
+            } else {
+                "143";
+                play.text = " Play ";
+                "144";
+            }
+            if ((menuSelect === 2 || typeof menuSelect === "object" && ρσ_equals(menuSelect, 2))) {
+                "145";
+                howToPlay.text = "[How To Play]";
+                "146";
+            } else {
+                "147";
+                howToPlay.text = " How To Play ";
+                "148";
+            }
+            if ((menuSelect === 3 || typeof menuSelect === "object" && ρσ_equals(menuSelect, 3))) {
+                "149";
+                DLC.text = "[DLC]";
+                "150";
+            } else {
+                "151";
+                DLC.text = " DLC ";
+                "152";
+            }
+            if (ρσ_in("\n", k)) {
+                "153";
+                (await scene.waitfor("keyup"));
+                "154";
+                title.visible = false;
+                "155";
+                play.visible = false;
+                "156";
+                howToPlay.visible = false;
+                "157";
+                DLC.visible = false;
+                "158";
+                selecting.visible = false;
+                "159";
+                ship.visible = false;
+                "160";
+                victory.visible = false;
+                "161";
+                for (var ρσ_Index9 = 0; ρσ_Index9["<"](4); ρσ_Index9++) {
+                    i = ρσ_Index9;
+                    "162";
+                    ρσ_getitem(intTor, i).visible = false;
+                    "163";
+                }
+                if ((menuSelect === 1 || typeof menuSelect === "object" && ρσ_equals(menuSelect, 1))) {
+                    "164";
+                    break;
+                    "165";
+                }
+                if ((menuSelect === 2 || typeof menuSelect === "object" && ρσ_equals(menuSelect, 2))) {
+                    "166";
+                    (await rules());
+                    "167";
+                }
+                if ((menuSelect === 3 || typeof menuSelect === "object" && ρσ_equals(menuSelect, 3))) {
+                    "168";
+                    (await content());
+                }
+            }
+        }
+        "171";
+        async function rules() {
+            var ρσ_ls, controlles, k;
+            "172";
+            controlles = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(50, pixelsInY["-"](1["*"](50)), 0), box: false, font: "monospace", height: 30, align: "left", text: ""})]);
+            "173";
+            (await scrollText(controlles, "Controlles:\n'wasd' to rotate your ship.\nNumbers 1-9 to show where your ship will move, use 0 to stop your ship.\nUse 'q' and 'e' to select 'Attack' or 'Reload'.\nOnce all options have been selected, use 'ENTER' to confirm and watch the explosions happen.\n\nActions:\n'Attack' will launch a homing torpedo that will zero in on the opponent.\nYou will run out of torpedoes and will have to use 'reload' to get up to 5 again.\n\nThis is a turn based game so take your time.\nLook around with right click and drag with your mouse.\n\n\nPress 'b' to go back to main menu."));
+            "174";
+            while (true) {
+                "175";
+                (await rate(100));
+                "176";
+                k = (await keysdown());
+                "177";
+                if (ρσ_in("b", k)) {
+                    "178";
+                    (await scene.waitfor("keyup"));
+                    "179";
+                    controlles.visible = false;
+                    "180";
+                    controlles = undefined;
+                    "181";
+                    break;
+                }
+            }
+        };
+        if (!rules.__module__) Object.defineProperties(rules, {
+            __module__ : {value: null}
+        });
+
+        "184";
+        async function content() {
+            var ρσ_ls, comingSoon, k;
+            "185";
+            comingSoon = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(50, pixelsInY["-"](1["*"](50)), 0), box: false, font: "monospace", height: 30, align: "left", text: ""})]);
+            "186";
+            (await scrollText(comingSoon, "Coming Soon...\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress 'b' to go back to main menu."));
+            "187";
+            while (true) {
+                "188";
+                (await rate(100));
+                "189";
+                k = (await keysdown());
+                "190";
+                if (ρσ_in("b", k)) {
+                    "191";
+                    (await scene.waitfor("keyup"));
+                    "192";
+                    comingSoon.visible = false;
+                    "193";
+                    comingSoon = undefined;
+                    "194";
+                    break;
+                }
+            }
+        };
+        if (!content.__module__) Object.defineProperties(content, {
+            __module__ : {value: null}
+        });
+
+        "197";
+        title.visible = false;
+        "198";
+        play.visible = false;
+        "199";
+        howToPlay.visible = false;
+        "200";
+        DLC.visible = false;
+        "201";
+        selecting.visible = false;
+        "202";
+        ship.visible = false;
+        "203";
+        victory.visible = false;
+        "204";
+        for (var ρσ_Index10 = 0; ρσ_Index10["<"](4); ρσ_Index10++) {
+            i = ρσ_Index10;
+            "205";
+            ρσ_getitem(intTor, i).visible = false;
+        }
+        "206";
+        title = undefined;
+        "207";
+        play = undefined;
+        "208";
+        howToPlay = undefined;
+        "209";
+        DLC = undefined;
+        "210";
+        selecting = undefined;
+        "211";
+        a = undefined;
+        "212";
+        b = undefined;
+        "213";
+        c = undefined;
+        "214";
+        d = undefined;
+        "215";
+        e = undefined;
+        "216";
+        f = undefined;
+        "217";
+        pa = undefined;
+        "218";
+        pb = undefined;
+        "219";
+        pc = undefined;
+        "220";
+        pd = undefined;
+        "221";
+        pe = undefined;
+        "222";
+        pf = undefined;
+        "223";
+        topFront = undefined;
+        "224";
+        botFront = undefined;
+        "225";
+        topBack = undefined;
+        "226";
+        botBack = undefined;
+        "227";
+        lineA1 = undefined;
+        "228";
+        lineA2 = undefined;
+        "229";
+        lineA3 = undefined;
+        "230";
+        lineA4 = undefined;
+        "231";
+        lineC1 = undefined;
+        "232";
+        lineC2 = undefined;
+        "233";
+        lineC3 = undefined;
+        "234";
+        lineC4 = undefined;
+        "235";
+        frontRightL = undefined;
+        "236";
+        rightBackL = undefined;
+        "237";
+        backLeftL = undefined;
+        "238";
+        leftFrontL = undefined;
+        "239";
+        salvo = undefined;
+        "240";
+        salvo2 = undefined;
+        "241";
+        intTor = undefined;
+        "242";
+        shaft = undefined;
+        "243";
+        flair = undefined;
+        "244";
+        fire1 = undefined;
+        "245";
+        fire2 = undefined;
+        "246";
+        fire3 = undefined;
+        "247";
+        fire4 = undefined;
+        "248";
+        fire5 = undefined;
+        "249";
+        bridge1 = undefined;
+        "250";
+        bridge2 = undefined;
+        "251";
+        edges = undefined;
+        "252";
+        ship = undefined;
+        "253";
+        victory = undefined;
+        "255";
+        pixelsInX = scene.width;
+        "256";
+        pixelsInY = scene.height;
+        "258";
+        scene.width = pixelsInX;
+        "259";
+        scene.height = pixelsInY;
+        (await sleep(.1));
+        "261";
+        scene.autoscale = false;
+        "262";
+        scene.userzoom = true;
+        "263";
+        scene.userspin = true;
+        "264";
+        scene.userpan = true;
+        "268";
+        health = ρσ_list_decorate([ "||||||||||", "||||||||", "||||||", "||||", "||", "" ]);
+        "269";
+        hit = 0;
+        "270";
+        hitOP = 0;
+        "273";
+        torDisplay = ρσ_list_decorate([ "", "|\n^", "| |\n^ ^", "| | |\n^ ^ ^", "| | | |\n^ ^ ^ ^", "| | | | |\n^ ^ ^ ^ ^" ]);
+        "274";
+        torTracker = 5;
+        "275";
+        torTrackerOP = 5;
+        "277";
+        heightFromTop = 15;
+        "279";
+        turn = 0;
+        "280";
+        turningMax = 50;
+        "282";
+        turnOrder = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(pixelsInX["/"](2), pixelsInY["-"](1["*"](heightFromTop)), 0), text: "", font: "monospace", box: false})]);
+        "285";
+        y = 0;
+        "286";
+        hitPointsTitle = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(60, pixelsInY["-"](1["*"](heightFromTop))["-"](1["*"](25)["*"](y)), 0), text: "HP", box: false, font: "monospace"})]);
+        "287";
+        y=y["+"](1);
+        "288";
+        hitPoints = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(20, pixelsInY["-"](1["*"](heightFromTop))["-"](1["*"](25)["*"](y)), 0), text: ρσ_getitem(health, hit), font: "monospace", box: false, align: "left"})]);
+        "289";
+        y=y["+"](1);
+        "290";
+        torCountTitle = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(60, pixelsInY["-"](1["*"](heightFromTop))["-"](1["*"](25)["*"](y)), 0), text: "Torpedoes", box: false, font: "monospace"})]);
+        "291";
+        y=y["+"](1);
+        "292";
+        torCount = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(23, pixelsInY["-"](1["*"](heightFromTop))["-"](1["*"](25)["*"](y)), 0), text: ρσ_getitem(torDisplay, torTracker), font: "monospace", box: false, align: "left"})]);
+        "293";
+        y=y["+"](2);
+        "294";
+        attack = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(60, pixelsInY["-"](1["*"](heightFromTop))["-"](1["*"](25)["*"](y)), 0), text: "Attack", font: "monospace", box: false})]);
+        "295";
+        y=y["+"](1);
+        "296";
+        reload = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(60, pixelsInY["-"](1["*"](heightFromTop))["-"](1["*"](25)["*"](y)), 0), text: "Reload", font: "monospace", box: false})]);
+        "297";
+        y=y["+"](1);
+        "306";
+        y = 0;
+        "307";
+        hitPointsTitleOP = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(pixelsInX["-"](1["*"](60)), pixelsInY["-"](1["*"](heightFromTop))["-"](1["*"](25)["*"](y)), 0), text: "HP", box: false, font: "monospace"})]);
+        "308";
+        y=y["+"](1);
+        "309";
+        hitPointsOP = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(pixelsInX["-"](1["*"](20)), pixelsInY["-"](1["*"](heightFromTop))["-"](1["*"](25)["*"](y)), 0), text: ρσ_getitem(health, hitOP), font: "monospace", box: false, align: "right"})]);
+        "310";
+        y=y["+"](1);
+        "311";
+        torCountTitleOP = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(pixelsInX["-"](1["*"](60)), pixelsInY["-"](1["*"](heightFromTop))["-"](1["*"](25)["*"](y)), 0), text: "Torpedoes", box: false, font: "monospace"})]);
+        "312";
+        y=y["+"](1);
+        "313";
+        torCountOP = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(pixelsInX["-"](1["*"](23)), pixelsInY["-"](1["*"](heightFromTop))["-"](1["*"](25)["*"](y)), 0), text: ρσ_getitem(torDisplay, torTrackerOP), font: "monospace", box: false, align: "right"})]);
+        "314";
+        y=y["+"](2);
+        "315";
+        attackOP = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(pixelsInX["-"](1["*"](60)), pixelsInY["-"](1["*"](heightFromTop))["-"](1["*"](25)["*"](y)), 0), text: "Attack", font: "monospace", box: false})]);
+        "316";
+        y=y["+"](1);
+        "317";
+        reloadOP = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pixel_pos: true, pos: vec(pixelsInX["-"](1["*"](60)), pixelsInY["-"](1["*"](heightFromTop))["-"](1["*"](25)["*"](y)), 0), text: "Reload", font: "monospace", box: false})]);
+        "318";
+        y=y["+"](1);
+        "327";
+        async function select(choice, attack, reload) {
+            "328";
+            if ((choice === 1 || typeof choice === "object" && ρσ_equals(choice, 1))) {
+                "329";
+                attack.text = "[Attack]";
+                "330";
+                reload.text = "Reload";
+                "331";
+            } else if ((choice === 2 || typeof choice === "object" && ρσ_equals(choice, 2))) {
+                "332";
+                attack.text = "Attack";
+                "333";
+                reload.text = "[Reload]";
+            }
+        };
+        if (!select.__argnames__) Object.defineProperties(select, {
+            __argnames__ : {value: ["choice", "attack", "reload"]},
+            __module__ : {value: null}
+        });
+
+        "336";
+        async function HP(hit, hitPointsTitle, hitPoints) {
+            var ρσ_ls, subHit, i;
+            "337";
+            subHit = hit["-"](1["*"](1));
+            "338";
+            if (ρσ_equals(subHit, 1["-u"]()["*"](1))) {
+                "339";
+                subHit = 5;
+            }
+            "341";
+            hitPoints.text = ρσ_getitem(health, hit);
+            "342";
+            for (var ρσ_Index11 = 0; ρσ_Index11["<"](2); ρσ_Index11++) {
+                i = ρσ_Index11;
+                "343";
+                hitPoints.text = ρσ_getitem(health, subHit);
+                "344";
+                (await sleep(.15));
+                "345";
+                hitPoints.text = ρσ_getitem(health, hit);
+                "346";
+                (await sleep(.15));
+                "347";
+            }
+            if ((hit === 5 || typeof hit === "object" && ρσ_equals(hit, 5))) {
+                "349";
+                hitPointsTitle.align = hitPoints.align;
+                "350";
+                hitPointsTitle.pos = hitPoints.pos["+"](vec(0, 20, 0));
+                "351";
+                hitPointsTitle.font = "monospace";
+                "352";
+                (await scrollText(hitPointsTitle, "TOTAL HULL FAILURE EVACUATE IMMEDIATELY"));
+                "353";
+                (await scrollText(hitPoints, "ALL HANDS ABANDON SHIP. REPET ABANDON SHIP"));
+            }
+            "354";
+            return hit;
+        };
+        if (!HP.__argnames__) Object.defineProperties(HP, {
+            __argnames__ : {value: ["hit", "hitPointsTitle", "hitPoints"]},
+            __module__ : {value: null}
+        });
+
+        "356";
+        async function scrollText(writeTo, phrase) {
+            var ρσ_ls, i;
+            "357";
+            var ρσ_Iter12 = range(len(phrase)["+"](1));
+            ρσ_Iter12 = ((typeof ρσ_Iter12[Symbol.iterator] === "function") ? (ρσ_Iter12 instanceof Map ? ρσ_Iter12.keys() : ρσ_Iter12) : Object.keys(ρσ_Iter12));
+            for (var ρσ_Index12 of ρσ_Iter12) {
+                i = ρσ_Index12;
+                "358";
+                (await rate(40));
+                "360";
+                writeTo.text = phrase.slice(0, i)["+"](" ".repeat((len(phrase)["+"](1)["-"](1["*"](i)))));
+            }
+        };
+        if (!scrollText.__argnames__) Object.defineProperties(scrollText, {
+            __argnames__ : {value: ["writeTo", "phrase"]},
+            __module__ : {value: null}
+        });
+
+        "364";
+        async function turning(invert, ship, shipX, shipZ, shadow, shipAxis, intTor, hitbox, collisionPoint) {
+            var ρσ_ls, turnAngle, i;
+            "366";
+            turnAngle = pi["/"](200);
+            "367";
+            ρσ_interpolate_kwargs.call(ship, ship.rotate, [ρσ_desugar_kwargs({angle: turnAngle["*"](invert), axis: vector(shipAxis.axis)})]);
+            "368";
+            ρσ_interpolate_kwargs.call(shipX, shipX.rotate, [ρσ_desugar_kwargs({angle: turnAngle["*"](invert), axis: vector(shipAxis.axis), origin: ship.pos})]);
+            "369";
+            ρσ_interpolate_kwargs.call(shipZ, shipZ.rotate, [ρσ_desugar_kwargs({angle: turnAngle["*"](invert), axis: vector(shipAxis.axis), origin: ship.pos})]);
+            "371";
+            ρσ_interpolate_kwargs.call(shadow, shadow.rotate, [ρσ_desugar_kwargs({angle: turnAngle["*"](invert), axis: vector(shipAxis.axis), origin: ship.pos})]);
+            "372";
+            ρσ_interpolate_kwargs.call(collisionPoint, collisionPoint.rotate, [ρσ_desugar_kwargs({angle: turnAngle["*"](invert), axis: vector(shipAxis.axis), origin: ship.pos})]);
+            "374";
+            for (var ρσ_Index13 = 0; ρσ_Index13["<"](4); ρσ_Index13++) {
+                i = ρσ_Index13;
+                "375";
+                (ρσ_expr_temp = ρσ_getitem(intTor, i), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: turnAngle["*"](invert), axis: vector(shipAxis.axis), origin: ship.pos})]));
+            }
+            "376";
+            for (var ρσ_Index14 = 0; ρσ_Index14["<"](8); ρσ_Index14++) {
+                i = ρσ_Index14;
+                "377";
+                (ρσ_expr_temp = ρσ_getitem(hitbox, i), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: turnAngle["*"](invert), axis: vector(shipAxis.axis), origin: ship.pos})]));
+            }
+        };
+        if (!turning.__argnames__) Object.defineProperties(turning, {
+            __argnames__ : {value: ["invert", "ship", "shipX", "shipZ", "shadow", "shipAxis", "intTor", "hitbox", "collisionPoint"]},
+            __module__ : {value: null}
+        });
+
+        "379";
+        async function distance(k, shadow, ship, shipZ, invert) {
+            var ρσ_ls, dd;
+            "382";
+            if (ρσ_in("1", k)) {
+                "383";
+                dd = 1["/"](4);
+                "384";
+                shadow.pos = ship.pos["+"](shipZ.axis["*"](dd)["*"](invert));
+                "385";
+            }
+            if (ρσ_in("2", k)) {
+                "386";
+                dd = 1["/"](2);
+                "387";
+                shadow.pos = ship.pos["+"](shipZ.axis["*"](dd)["*"](invert));
+                "388";
+            }
+            if (ρσ_in("3", k)) {
+                "389";
+                dd = 3["/"](4);
+                "390";
+                shadow.pos = ship.pos["+"](shipZ.axis["*"](dd)["*"](invert));
+                "391";
+            }
+            if (ρσ_in("4", k)) {
+                "392";
+                dd = 1;
+                "393";
+                shadow.pos = ship.pos["+"](shipZ.axis["*"](dd)["*"](invert));
+                "394";
+            }
+            if (ρσ_in("5", k)) {
+                "395";
+                dd = 5["/"](4);
+                "396";
+                shadow.pos = ship.pos["+"](shipZ.axis["*"](dd)["*"](invert));
+                "397";
+            }
+            if (ρσ_in("6", k)) {
+                "398";
+                dd = 1.5;
+                "399";
+                shadow.pos = ship.pos["+"](shipZ.axis["*"](dd)["*"](invert));
+                "400";
+            }
+            if (ρσ_in("7", k)) {
+                "401";
+                dd = 2;
+                "402";
+                shadow.pos = ship.pos["+"](shipZ.axis["*"](dd)["*"](invert));
+                "403";
+            }
+            if (ρσ_in("8", k)) {
+                "404";
+                dd = 2.5;
+                "405";
+                shadow.pos = ship.pos["+"](shipZ.axis["*"](dd)["*"](invert));
+                "406";
+            }
+            if (ρσ_in("9", k)) {
+                "407";
+                dd = floor(pi);
+                "408";
+                shadow.pos = ship.pos["+"](shipZ.axis["*"](dd)["*"](invert));
+                "409";
+            }
+            if (ρσ_in("0", k)) {
+                "410";
+                dd = 0;
+                "411";
+                shadow.pos = ship.pos;
+            }
+        };
+        if (!distance.__argnames__) Object.defineProperties(distance, {
+            __argnames__ : {value: ["k", "shadow", "ship", "shipZ", "invert"]},
+            __module__ : {value: null}
+        });
+
+        "413";
+        async function traverse(ship, shipOP, shadow, intTor, hitbox, hitboxOP, turn, hit, hitPointsTitle, hitPoints, collisionPoint) {
+            var ρσ_ls, x, movement, i, empty;
+            "415";
+            x = 0;
+            "416";
+            movement = shadow.pos["-"](1["*"](ship.pos))["/"](100);
+            "417";
+            while (true) {
+                "418";
+                (await rate(100));
+                "419";
+                if (ρσ_equals(ceil(ship.pos.x), ceil(shadow.pos.x)) & ρσ_equals(ceil(ship.pos.y), ceil(shadow.pos.y)) & ρσ_equals(ceil(ship.pos.z), ceil(shadow.pos.z))) {
+                    "420";
+                    shadow.pos = ship.pos;
+                    "421";
+                    break;
+                    "422";
+                } else if ((x === 165 || typeof x === "object" && ρσ_equals(x, 165))) {
+                    "423";
+                    shadow.pos = ship.pos;
+                    "424";
+                    break;
+                }
+                "425";
+                x=x["+"](1);
+                "426";
+                if (x["<="](100)) {
+                    "427";
+                    ship.pos=ship.pos["+"](movement["*"](x)["/"](100));
+                    "428";
+                    for (var ρσ_Index15 = 0; ρσ_Index15["<"](4); ρσ_Index15++) {
+                        i = ρσ_Index15;
+                        "429";
+                        ρσ_getitem(intTor, i).pos=ρσ_getitem(intTor, i).pos["+"](movement["*"](x)["/"](100));
+                    }
+                    "430";
+                    for (var ρσ_Index16 = 0; ρσ_Index16["<"](8); ρσ_Index16++) {
+                        i = ρσ_Index16;
+                        "431";
+                        ρσ_getitem(hitbox, i).pos=ρσ_getitem(hitbox, i).pos["+"](movement["*"](x)["/"](100));
+                    }
+                    "432";
+                    collisionPoint.pos=collisionPoint.pos["+"](movement["*"](x)["/"](100));
+                    "433";
+                } else if (x[">="](110)) {
+                    "434";
+                    ship.pos=ship.pos["+"](movement["*"](210["-"](1["*"](x)))["/"](100));
+                    "435";
+                    for (var ρσ_Index17 = 0; ρσ_Index17["<"](4); ρσ_Index17++) {
+                        i = ρσ_Index17;
+                        "436";
+                        ρσ_getitem(intTor, i).pos=ρσ_getitem(intTor, i).pos["+"](movement["*"](210["-"](1["*"](x)))["/"](100));
+                    }
+                    "437";
+                    for (var ρσ_Index18 = 0; ρσ_Index18["<"](8); ρσ_Index18++) {
+                        i = ρσ_Index18;
+                        "438";
+                        ρσ_getitem(hitbox, i).pos=ρσ_getitem(hitbox, i).pos["+"](movement["*"](210["-"](1["*"](x)))["/"](100));
+                    }
+                    "439";
+                    collisionPoint.pos=collisionPoint.pos["+"](movement["*"](210["-"](1["*"](x)))["/"](100));
+                    "440";
+                } else {
+                    "441";
+                    ship.pos=ship.pos["+"](movement);
+                    "442";
+                    for (var ρσ_Index19 = 0; ρσ_Index19["<"](4); ρσ_Index19++) {
+                        i = ρσ_Index19;
+                        "443";
+                        ρσ_getitem(intTor, i).pos=ρσ_getitem(intTor, i).pos["+"](movement);
+                    }
+                    "444";
+                    for (var ρσ_Index20 = 0; ρσ_Index20["<"](8); ρσ_Index20++) {
+                        i = ρσ_Index20;
+                        "445";
+                        ρσ_getitem(hitbox, i).pos=ρσ_getitem(hitbox, i).pos["+"](movement);
+                    }
+                    "446";
+                    collisionPoint.pos=collisionPoint.pos["+"](movement);
+                }
+                "448";
+                for (var ρσ_Index21 = 0; ρσ_Index21["<"](turn); ρσ_Index21++) {
+                    i = ρσ_Index21;
+                    "450";
+                    if (ρσ_equals(x["/"](10), floor(x["/"](10))) && mag(ρσ_getitem(tor, i).pos["-"](1["*"](ship.pos)))["<="](90)) {
+                        "451";
+                        if (ρσ_equals((await hitReg(ρσ_getitem(tor, i).pos, hitbox)), true)) {
+                            "452";
+                            hit=hit["+"](1);
+                            "453";
+                            (await HP(hit, hitPointsTitle, hitPoints));
+                            "454";
+                            empty = i["+"](2);
+                            "455";
+                            while (true) {
+                                "456";
+                                if (ρσ_getitem(tor, empty).pos.x[">"](4900)) {
+                                    "457";
+                                    break;
+                                }
+                                "458";
+                                empty=empty["+"](2);
+                            }
+                            "459";
+                            ρσ_getitem(tor, i).pos = ρσ_getitem(tor, empty["-"](1["*"](2))).pos;
+                            "460";
+                            ρσ_getitem(tor, i).axis = ρσ_getitem(tor, empty["-"](1["*"](2))).axis;
+                            "461";
+                            ρσ_getitem(tor, empty["-"](1["*"](2))).pos = vec(5e3, 0, 0);
+                            "463";
+                        }
+                    }
+                }
+                if (mag(shipOP.pos["-"](1["*"](ship.pos)))["<="](180)) {
+                    "464";
+                    if (ρσ_equals((await hitReg(collisionPoint.pos, hitboxOP)), true)) {
+                        "465";
+                        ship.pos=ship.pos["-"](movement);
+                        "466";
+                        for (var ρσ_Index22 = 0; ρσ_Index22["<"](4); ρσ_Index22++) {
+                            i = ρσ_Index22;
+                            "467";
+                            ρσ_getitem(intTor, i).pos=ρσ_getitem(intTor, i).pos["-"](movement);
+                        }
+                        "468";
+                        for (var ρσ_Index23 = 0; ρσ_Index23["<"](8); ρσ_Index23++) {
+                            i = ρσ_Index23;
+                            "469";
+                            ρσ_getitem(hitbox, i).pos=ρσ_getitem(hitbox, i).pos["-"](movement);
+                        }
+                        "470";
+                        collisionPoint.pos=collisionPoint.pos["-"](movement);
+                        "472";
+                    }
+                }
+                if (mag(ship.pos)[">="](4e3)) {
+                    "473";
+                    ship.pos=ship.pos["-"](movement);
+                    "474";
+                    for (var ρσ_Index24 = 0; ρσ_Index24["<"](4); ρσ_Index24++) {
+                        i = ρσ_Index24;
+                        "475";
+                        ρσ_getitem(intTor, i).pos=ρσ_getitem(intTor, i).pos["-"](movement);
+                    }
+                    "476";
+                    for (var ρσ_Index25 = 0; ρσ_Index25["<"](8); ρσ_Index25++) {
+                        i = ρσ_Index25;
+                        "477";
+                        ρσ_getitem(hitbox, i).pos=ρσ_getitem(hitbox, i).pos["-"](movement);
+                    }
+                    "478";
+                    collisionPoint.pos=collisionPoint.pos["-"](movement);
+                }
+            }
+            "479";
+            return hit;
+        };
+        if (!traverse.__argnames__) Object.defineProperties(traverse, {
+            __argnames__ : {value: ["ship", "shipOP", "shadow", "intTor", "hitbox", "hitboxOP", "turn", "hit", "hitPointsTitle", "hitPoints", "collisionPoint"]},
+            __module__ : {value: null}
+        });
+
+        "490";
+        async function torpedo(tor, intTor, OP, torCount) {
+            var ρσ_ls, randy, i;
+            "491";
+            randy = random.randint(0, 3);
+            "493";
+            i = 0["+"](OP);
+            "494";
+            while (true) {
+                "495";
+                (await rate(1));
+                "496";
+                if (ρσ_getitem(tor, i).pos.x[">"](4900)) {
+                    "497";
+                    break;
+                    "498";
+                } else {
+                    "500";
+                    i=i["+"](2);
+                }
+            }
+            "501";
+            ρσ_getitem(tor, i).pos = ρσ_getitem(intTor, randy).pos;
+            "502";
+            if ((OP === 0 || typeof OP === "object" && ρσ_equals(OP, 0))) {
+                "503";
+                ρσ_getitem(tor, i).axis = ρσ_getitem(intTor, 0).axis;
+                "504";
+            } else {
+                "505";
+                ρσ_getitem(tor, i).axis = ρσ_getitem(intTorOP, 0).axis;
+            }
+        };
+        if (!torpedo.__argnames__) Object.defineProperties(torpedo, {
+            __argnames__ : {value: ["tor", "intTor", "OP", "torCount"]},
+            __module__ : {value: null}
+        });
+
+        "509";
+        async function torMovement(i, hitbox, hitboxOP, ship, shipOP, hit) {
+            var ρσ_ls, hitTic, quickbreak, x, movement, empty, CrossPro, angleToTarget, turnRate;
+            "511";
+            hitTic = 3;
+            "512";
+            if ((i === 0 || typeof i === "object" && ρσ_equals(i, 0))) {
+                "513";
+                while (true) {
+                    "514";
+                    quickbreak = false;
+                    "515";
+                    if (ρσ_getitem(tor, i).pos.x[">"](4900)) {
+                        "516";
+                        break;
+                    }
+                    "517";
+                    x = 0;
+                    "518";
+                    movement = ρσ_getitem(tor, i).axis["/"](5);
+                    "519";
+                    while (true) {
+                        "520";
+                        (await rate(300));
+                        "521";
+                        if (x[">="](100)) {
+                            "522";
+                            break;
+                            "523";
+                        }
+                        if (x["<="](30)) {
+                            "524";
+                            ρσ_getitem(tor, i).pos=ρσ_getitem(tor, i).pos["+"](movement["*"](x)["/"](30));
+                            "525";
+                        } else if (x[">="](70)) {
+                            "526";
+                            ρσ_getitem(tor, i).pos=ρσ_getitem(tor, i).pos["+"](movement["*"](100["-"](1["*"](x)))["/"](30));
+                            "527";
+                        } else {
+                            "528";
+                            ρσ_getitem(tor, i).pos=ρσ_getitem(tor, i).pos["+"](movement);
+                            "530";
+                        }
+                        if (ρσ_equals(x["/"](hitTic), floor(x["/"](hitTic))) && mag(ρσ_getitem(tor, i).pos["-"](1["*"](shipOP.pos)))["<="](90)) {
+                            "531";
+                            if (ρσ_equals((await hitReg(ρσ_getitem(tor, i).pos, hitboxOP)), true)) {
+                                "532";
+                                (await boomBoom(ρσ_getitem(tor, i).pos));
+                                "533";
+                                hit=hit["+"](1);
+                                "534";
+                                hit = (await HP(hit, hitPointsTitleOP, hitPointsOP));
+                                "535";
+                                empty = 0;
+                                "536";
+                                while (true) {
+                                    "537";
+                                    if (ρσ_getitem(tor, empty).pos.x[">"](4900)) {
+                                        "538";
+                                        break;
+                                    }
+                                    "539";
+                                    empty=empty["+"](2);
+                                }
+                                "540";
+                                ρσ_getitem(tor, i).pos = ρσ_getitem(tor, empty["-"](1["*"](2))).pos;
+                                "541";
+                                ρσ_getitem(tor, i).axis = ρσ_getitem(tor, empty["-"](1["*"](2))).axis;
+                                "542";
+                                ρσ_getitem(tor, empty["-"](1["*"](2))).pos = vec(5e3, 0, 0);
+                                "543";
+                                quickbreak = true;
+                                "544";
+                                break;
+                                "546";
+                            }
+                        }
+                        if (ρσ_equals(x["/"](hitTic), floor(x["/"](hitTic))) && mag(ρσ_getitem(tor, i).pos["-"](1["*"](ship.pos)))["<="](90)) {
+                            "547";
+                            if (ρσ_equals((await hitReg(ρσ_getitem(tor, i).pos, hitbox)), true)) {
+                                "548";
+                                (await boomBoom(ρσ_getitem(tor, i).pos));
+                                "549";
+                                hit=hit["+"](1);
+                                "550";
+                                hit=hit["*"](1["-u"]()["*"](1));
+                                "551";
+                                empty = 0;
+                                "552";
+                                while (true) {
+                                    "553";
+                                    if (ρσ_getitem(tor, empty).pos.x[">"](4900)) {
+                                        "554";
+                                        break;
+                                    }
+                                    "555";
+                                    empty=empty["+"](2);
+                                }
+                                "556";
+                                ρσ_getitem(tor, i).pos = ρσ_getitem(tor, empty["-"](1["*"](2))).pos;
+                                "557";
+                                ρσ_getitem(tor, i).axis = ρσ_getitem(tor, empty["-"](1["*"](2))).axis;
+                                "558";
+                                ρσ_getitem(tor, empty["-"](1["*"](2))).pos = vec(5e3, 0, 0);
+                                "559";
+                                quickbreak = true;
+                                "560";
+                                break;
+                            }
+                        }
+                        "561";
+                        x=x["+"](1);
+                        "562";
+                    }
+                    if ((quickbreak === false || typeof quickbreak === "object" && ρσ_equals(quickbreak, false))) {
+                        "564";
+                        CrossPro = cross(shipOP.pos["-"](1["*"](ρσ_getitem(tor, i).pos)), ρσ_getitem(tor, i).axis);
+                        "567";
+                        angleToTarget = diff_angle(shipOP.pos["-"](1["*"](ρσ_getitem(tor, i).pos)), ρσ_getitem(tor, i).axis);
+                        "569";
+                        if (angleToTarget[">="](pi["/"](3))) {
+                            "570";
+                            turnRate = pi["/"](3);
+                            "572";
+                        } else {
+                            "574";
+                            turnRate = angleToTarget;
+                        }
+                        "575";
+                        (ρσ_expr_temp = ρσ_getitem(tor, i), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: 1["-u"]()["*"](turnRate), axis: CrossPro})]));
+                        "576";
+                        i=i["+"](2);
+                        "578";
+                    }
+                }
+            }
+            if ((i === 1 || typeof i === "object" && ρσ_equals(i, 1))) {
+                "579";
+                while (true) {
+                    "580";
+                    quickbreak = false;
+                    "581";
+                    if (ρσ_getitem(tor, i).pos.x[">"](4e3)) {
+                        "582";
+                        break;
+                    }
+                    "583";
+                    x = 0;
+                    "584";
+                    movement = ρσ_getitem(tor, i).axis["/"](5);
+                    "585";
+                    while (true) {
+                        "586";
+                        (await rate(300));
+                        "587";
+                        if (x[">="](100)) {
+                            "588";
+                            break;
+                            "589";
+                        }
+                        if (x["<="](30)) {
+                            "590";
+                            ρσ_getitem(tor, i).pos=ρσ_getitem(tor, i).pos["+"](movement["*"](x)["/"](30));
+                            "591";
+                        } else if (x[">="](70)) {
+                            "592";
+                            ρσ_getitem(tor, i).pos=ρσ_getitem(tor, i).pos["+"](movement["*"](100["-"](1["*"](x)))["/"](30));
+                            "593";
+                        } else {
+                            "594";
+                            ρσ_getitem(tor, i).pos=ρσ_getitem(tor, i).pos["+"](movement);
+                            "596";
+                        }
+                        if (ρσ_equals(x["/"](hitTic), floor(x["/"](hitTic))) && mag(ρσ_getitem(tor, i).pos["-"](1["*"](ship.pos)))["<="](90)) {
+                            "597";
+                            if (ρσ_equals((await hitReg(ρσ_getitem(tor, i).pos, hitbox)), true)) {
+                                "598";
+                                (await boomBoom(ρσ_getitem(tor, i).pos));
+                                "599";
+                                hit=hit["+"](1);
+                                "600";
+                                hit = (await HP(hit, hitPointsTitle, hitPoints));
+                                "601";
+                                empty = 1;
+                                "602";
+                                while (true) {
+                                    "603";
+                                    if (ρσ_getitem(tor, empty).pos.x[">"](4900)) {
+                                        "604";
+                                        break;
+                                    }
+                                    "605";
+                                    empty=empty["+"](2);
+                                }
+                                "606";
+                                ρσ_getitem(tor, i).pos = ρσ_getitem(tor, empty["-"](1["*"](2))).pos;
+                                "607";
+                                ρσ_getitem(tor, i).axis = ρσ_getitem(tor, empty["-"](1["*"](2))).axis;
+                                "608";
+                                ρσ_getitem(tor, empty["-"](1["*"](2))).pos = vec(5e3, 0, 0);
+                                "609";
+                                quickbreak = true;
+                                "610";
+                                break;
+                                "612";
+                            }
+                        }
+                        if (ρσ_equals(x["/"](hitTic), floor(x["/"](hitTic))) && mag(ρσ_getitem(tor, i).pos["-"](1["*"](shipOP.pos)))["<="](90)) {
+                            "613";
+                            if (ρσ_equals((await hitReg(ρσ_getitem(tor, i).pos, hitboxOP)), true)) {
+                                "614";
+                                (await boomBoom(ρσ_getitem(tor, i).pos));
+                                "615";
+                                hit=hit["+"](1);
+                                "616";
+                                hit=hit["*"](1["-u"]()["*"](1));
+                                "617";
+                                empty = 0;
+                                "618";
+                                while (true) {
+                                    "619";
+                                    if (ρσ_getitem(tor, empty).pos.x[">"](4900)) {
+                                        "620";
+                                        break;
+                                    }
+                                    "621";
+                                    empty=empty["+"](2);
+                                }
+                                "622";
+                                ρσ_getitem(tor, i).pos = ρσ_getitem(tor, empty["-"](1["*"](2))).pos;
+                                "623";
+                                ρσ_getitem(tor, i).axis = ρσ_getitem(tor, empty["-"](1["*"](2))).axis;
+                                "624";
+                                ρσ_getitem(tor, empty["-"](1["*"](2))).pos = vec(5e3, 0, 0);
+                                "625";
+                                quickbreak = true;
+                                "626";
+                                break;
+                            }
+                        }
+                        "627";
+                        x=x["+"](1);
+                        "628";
+                    }
+                    if ((quickbreak === false || typeof quickbreak === "object" && ρσ_equals(quickbreak, false))) {
+                        "630";
+                        CrossPro = cross(ship.pos["-"](1["*"](ρσ_getitem(tor, i).pos)), ρσ_getitem(tor, i).axis);
+                        "633";
+                        angleToTarget = diff_angle(ship.pos["-"](1["*"](ρσ_getitem(tor, i).pos)), ρσ_getitem(tor, i).axis);
+                        "635";
+                        if (angleToTarget[">="](pi["/"](3))) {
+                            "636";
+                            turnRate = pi["/"](3);
+                            "638";
+                        } else {
+                            "640";
+                            turnRate = angleToTarget;
+                        }
+                        "641";
+                        (ρσ_expr_temp = ρσ_getitem(tor, i), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: 1["-u"]()["*"](turnRate), axis: CrossPro})]));
+                        "642";
+                        i=i["+"](2);
+                    }
+                }
+            }
+            "643";
+            return hit;
+        };
+        if (!torMovement.__argnames__) Object.defineProperties(torMovement, {
+            __argnames__ : {value: ["i", "hitbox", "hitboxOP", "ship", "shipOP", "hit"]},
+            __module__ : {value: null}
+        });
+
+        "646";
+        async function hitReg(point, hitbox) {
+            var ρσ_ls, hit, pointAxis, angleToHit, i;
+            "647";
+            hit = true;
+            "648";
+            pointAxis = ρσ_interpolate_kwargs.call(this, ellipsoid, [ρσ_desugar_kwargs({opacity: 0})]);
+            "649";
+            for (var ρσ_Index26 = 0; ρσ_Index26["<"](8); ρσ_Index26++) {
+                i = ρσ_Index26;
+                "650";
+                pointAxis.axis = point["-"](1["*"](ρσ_getitem(hitbox, i).pos));
+                "651";
+                angleToHit = diff_angle(ρσ_getitem(hitbox, i).axis, pointAxis.axis);
+                "653";
+                if (abs(angleToHit)["<"](pi["/"](2))) {
+                    "654";
+                    hit = false;
+                    "655";
+                    break;
+                }
+            }
+            "656";
+            pointAxis = undefined;
+            "657";
+            return hit;
+        };
+        if (!hitReg.__argnames__) Object.defineProperties(hitReg, {
+            __argnames__ : {value: ["point", "hitbox"]},
+            __module__ : {value: null}
+        });
+
+        "659";
+        async function boomBoom(point) {
+            var ρσ_ls, andre, i;
+            "660";
+            andre = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: point, radius: 0, texture: "https://t3.ftcdn.net/jpg/03/04/54/36/360_F_304543628_5nns3tVTWRqogZJij4ad4YhquGRI06Pw.jpg", opacity: .8})]);
+            "661";
+            for (var ρσ_Index27 = 0; ρσ_Index27["<"](6); ρσ_Index27++) {
+                i = ρσ_Index27;
+                "662";
+                (await rate(100));
+                "663";
+                andre.radius=andre.radius["+"](6["-"](1["*"](i)));
+            }
+            "664";
+            for (var ρσ_Index28 = 0; ρσ_Index28["<"](6); ρσ_Index28++) {
+                i = ρσ_Index28;
+                "665";
+                (await rate(100));
+                "666";
+                andre.radius=andre.radius["-"](i["+"](1));
+            }
+            "667";
+            andre = undefined;
+        };
+        if (!boomBoom.__argnames__) Object.defineProperties(boomBoom, {
+            __argnames__ : {value: ["point"]},
+            __module__ : {value: null}
+        });
+
+        "672";
+        a = ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(0, 20, 0)})]);
+        "673";
+        b = ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(0, 0, 50)})]);
+        "674";
+        c = ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(0, 1["-u"]()["*"](20), 0)})]);
+        "675";
+        d = ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(0, 0, 1["-u"]()["*"](50))})]);
+        "676";
+        e = ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(150, 0, 0)})]);
+        "677";
+        f = ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](30), 0, 0)})]);
+        "679";
+        pa = pos = vec(0, 20, 0);
+        "680";
+        pb = pos = vec(0, 0, 50);
+        "681";
+        pc = pos = vec(0, 1["-u"]()["*"](20), 0);
+        "682";
+        pd = pos = vec(0, 0, 1["-u"]()["*"](50));
+        "683";
+        pe = pos = vec(150, 0, 0);
+        "684";
+        pf = pos = vec(1["-u"]()["*"](30), 0, 0);
+        "687";
+        topFront = ρσ_interpolate_kwargs.call(this, quad, [ρσ_desugar_kwargs({v0: a, v1: b, v2: e, v3: d})]);
+        "688";
+        botFront = ρσ_interpolate_kwargs.call(this, quad, [ρσ_desugar_kwargs({v0: c, v1: b, v2: e, v3: d})]);
+        "689";
+        topBack = ρσ_interpolate_kwargs.call(this, quad, [ρσ_desugar_kwargs({v0: a, v1: b, v2: f, v3: d})]);
+        "690";
+        botBack = ρσ_interpolate_kwargs.call(this, quad, [ρσ_desugar_kwargs({v0: c, v1: b, v2: f, v3: d})]);
+        "692";
+        rad = 1;
+        "693";
+        lineA1 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pb["-"](1["*"](pa)), radius: rad})]);
+        "694";
+        lineA2 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pd["-"](1["*"](pa)), radius: rad})]);
+        "695";
+        lineA3 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pe["-"](1["*"](pa)), radius: rad})]);
+        "696";
+        lineA4 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pf["-"](1["*"](pa)), radius: rad})]);
+        "698";
+        lineC1 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pc, axis: pb["-"](1["*"](pc)), radius: rad})]);
+        "699";
+        lineC2 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pc, axis: pd["-"](1["*"](pc)), radius: rad})]);
+        "700";
+        lineC3 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pc, axis: pe["-"](1["*"](pc)), radius: rad})]);
+        "701";
+        lineC4 = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pc, axis: pf["-"](1["*"](pc)), radius: rad})]);
+        "703";
+        frontRightL = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pe, axis: pb["-"](1["*"](pe)), radius: rad})]);
+        "704";
+        rightBackL = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pb, axis: pf["-"](1["*"](pb)), radius: rad})]);
+        "705";
+        backLeftL = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pf, axis: pd["-"](1["*"](pf)), radius: rad})]);
+        "706";
+        leftFrontL = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pd, axis: pe["-"](1["*"](pd)), radius: rad})]);
+        "709";
+        salvo = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(40, 10, 20), size: vec(25, 5, 10)})]);
+        "710";
+        salvo2 = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(40, 10, 1["-u"]()["*"](20)), size: vec(25, 5, 10)})]);
+        "712";
+        ρσ_interpolate_kwargs.call(salvo, salvo.rotate, [ρσ_desugar_kwargs({angle: 1["-u"]()["*"](pi)["/"](8), axis: pf["-"](1["*"](pe))})]);
+        "713";
+        ρσ_interpolate_kwargs.call(salvo, salvo.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]);
+        "714";
+        ρσ_interpolate_kwargs.call(salvo2, salvo2.rotate, [ρσ_desugar_kwargs({angle: pi["/"](8), axis: pf["-"](1["*"](pe))})]);
+        "715";
+        ρσ_interpolate_kwargs.call(salvo2, salvo2.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]);
+        "718";
+        intTor = ρσ_list_decorate([]);
+        "719";
+        for (var ρσ_Index29 = 0; ρσ_Index29["<"](4); ρσ_Index29++) {
+            i = ρσ_Index29;
+            "720";
+            shaft = ρσ_interpolate_kwargs.call(this, ellipsoid, [ρσ_desugar_kwargs({length: 20, width: 2.5, height: 2.5, color: vec(.7, .7, .7)})]);
+            "721";
+            flair = ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 0, 0), size: vector(5, 2.5, 2.5), color: vec(.7, .7, .7)})]);
+            "722";
+            fire1 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 0, 0), radius: .5, color: color.red})]);
+            "723";
+            fire2 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), .5, .5), radius: .5, color: color.red})]);
+            "724";
+            fire3 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 1["-u"]()["*"](.5), .5), radius: .5, color: color.red})]);
+            "725";
+            fire4 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), .5, 1["-u"]()["*"](.5)), radius: .5, color: color.red})]);
+            "726";
+            fire5 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 1["-u"]()["*"](.5), 1["-u"]()["*"](.5)), radius: .5, color: color.red})]);
+            "727";
+            ρσ_setitem(intTor, i, compound(ρσ_list_decorate([ shaft, flair, fire1, fire2, fire3, fire4, fire5 ])));
+        }
+        "729";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 0), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: 1["-u"]()["*"](pi)["/"](8), axis: pf["-"](1["*"](pe))})]));
+        "730";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 0), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]));
+        "731";
+        ρσ_getitem(intTor, 0).pos = vec(45, 8.5, 22);
+        "733";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 1), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: 1["-u"]()["*"](pi)["/"](8), axis: pf["-"](1["*"](pe))})]));
+        "734";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 1), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]));
+        "735";
+        ρσ_getitem(intTor, 1).pos = vec(45, 10, 18);
+        "738";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 2), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](8), axis: pf["-"](1["*"](pe))})]));
+        "739";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 2), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]));
+        "740";
+        ρσ_getitem(intTor, 2).pos = vec(45, 8.5, 1["-u"]()["*"](22));
+        "742";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 3), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](8), axis: pf["-"](1["*"](pe))})]));
+        "743";
+        (ρσ_expr_temp = ρσ_getitem(intTor, 3), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]));
+        "744";
+        ρσ_getitem(intTor, 3).pos = vec(45, 10, 1["-u"]()["*"](18));
+        "748";
+        intTorOP = ρσ_list_decorate([]);
+        "749";
+        for (var ρσ_Index30 = 0; ρσ_Index30["<"](4); ρσ_Index30++) {
+            i = ρσ_Index30;
+            "750";
+            shaft = ρσ_interpolate_kwargs.call(this, ellipsoid, [ρσ_desugar_kwargs({length: 20, width: 2.5, height: 2.5, color: vec(.7, .7, .7)})]);
+            "751";
+            flair = ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 0, 0), size: vector(5, 2.5, 2.5), color: vec(.7, .7, .7)})]);
+            "752";
+            fire1 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 0, 0), radius: .5, color: color.red})]);
+            "753";
+            fire2 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), .5, .5), radius: .5, color: color.red})]);
+            "754";
+            fire3 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 1["-u"]()["*"](.5), .5), radius: .5, color: color.red})]);
+            "755";
+            fire4 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), .5, 1["-u"]()["*"](.5)), radius: .5, color: color.red})]);
+            "756";
+            fire5 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 1["-u"]()["*"](.5), 1["-u"]()["*"](.5)), radius: .5, color: color.red})]);
+            "757";
+            ρσ_setitem(intTorOP, i, compound(ρσ_list_decorate([ shaft, flair, fire1, fire2, fire3, fire4, fire5 ])));
+        }
+        "759";
+        (ρσ_expr_temp = ρσ_getitem(intTorOP, 0), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: 1["-u"]()["*"](pi)["/"](8), axis: pf["-"](1["*"](pe))})]));
+        "760";
+        (ρσ_expr_temp = ρσ_getitem(intTorOP, 0), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]));
+        "761";
+        ρσ_getitem(intTorOP, 0).pos = vec(45, 8.5, 22);
+        "763";
+        (ρσ_expr_temp = ρσ_getitem(intTorOP, 1), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: 1["-u"]()["*"](pi)["/"](8), axis: pf["-"](1["*"](pe))})]));
+        "764";
+        (ρσ_expr_temp = ρσ_getitem(intTorOP, 1), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]));
+        "765";
+        ρσ_getitem(intTorOP, 1).pos = vec(45, 10, 18);
+        "768";
+        (ρσ_expr_temp = ρσ_getitem(intTorOP, 2), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](8), axis: pf["-"](1["*"](pe))})]));
+        "769";
+        (ρσ_expr_temp = ρσ_getitem(intTorOP, 2), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]));
+        "770";
+        ρσ_getitem(intTorOP, 2).pos = vec(45, 8.5, 1["-u"]()["*"](22));
+        "772";
+        (ρσ_expr_temp = ρσ_getitem(intTorOP, 3), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](8), axis: pf["-"](1["*"](pe))})]));
+        "773";
+        (ρσ_expr_temp = ρσ_getitem(intTorOP, 3), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi["/"](32), axis: pd["-"](1["*"](pb))})]));
+        "774";
+        ρσ_getitem(intTorOP, 3).pos = vec(45, 10, 1["-u"]()["*"](18));
+        "776";
+        visable = 0;
+        "777";
+        hitPoint = ρσ_list_decorate([]);
+        "778";
+        ρσ_setitem(hitPoint, 0, ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pb["-"](1["*"](pa)), radius: rad, opacity: visable})]));
+        "779";
+        ρσ_setitem(hitPoint, 1, ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pe["-"](1["*"](pa)), radius: rad, opacity: visable})]));
+        "780";
+        ρσ_setitem(hitPoint, 2, ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pd["-"](1["*"](pa)), radius: rad, opacity: visable})]));
+        "781";
+        ρσ_setitem(hitPoint, 3, ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pf["-"](1["*"](pa)), radius: rad, opacity: visable})]));
+        "783";
+        ρσ_setitem(hitPoint, 4, ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pc, axis: pe["-"](1["*"](pc)), radius: rad, opacity: visable})]));
+        "784";
+        ρσ_setitem(hitPoint, 5, ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pc, axis: pd["-"](1["*"](pc)), radius: rad, opacity: visable})]));
+        "785";
+        ρσ_setitem(hitPoint, 6, ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pc, axis: pf["-"](1["*"](pc)), radius: rad, opacity: visable})]));
+        "786";
+        ρσ_setitem(hitPoint, 7, ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pc, axis: pb["-"](1["*"](pc)), radius: rad, opacity: visable})]));
+        "788";
+        hitbox = ρσ_list_decorate([]);
+        "789";
+        ρσ_setitem(hitbox, 0, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 3).axis, ρσ_getitem(hitPoint, 0).axis), pos: ρσ_getitem(hitPoint, 0).pos, opacity: visable})]));
+        "790";
+        ρσ_setitem(hitbox, 1, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 0).axis, ρσ_getitem(hitPoint, 1).axis), pos: ρσ_getitem(hitPoint, 1).pos, opacity: visable})]));
+        "791";
+        ρσ_setitem(hitbox, 2, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 1).axis, ρσ_getitem(hitPoint, 2).axis), pos: ρσ_getitem(hitPoint, 2).pos, opacity: visable})]));
+        "792";
+        ρσ_setitem(hitbox, 3, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 2).axis, ρσ_getitem(hitPoint, 3).axis), pos: ρσ_getitem(hitPoint, 3).pos, opacity: visable})]));
+        "794";
+        ρσ_setitem(hitbox, 4, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 4).axis, ρσ_getitem(hitPoint, 7).axis), pos: ρσ_getitem(hitPoint, 4).pos, opacity: visable})]));
+        "795";
+        ρσ_setitem(hitbox, 5, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 5).axis, ρσ_getitem(hitPoint, 4).axis), pos: ρσ_getitem(hitPoint, 5).pos, opacity: visable})]));
+        "796";
+        ρσ_setitem(hitbox, 6, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 6).axis, ρσ_getitem(hitPoint, 5).axis), pos: ρσ_getitem(hitPoint, 6).pos, opacity: visable})]));
+        "797";
+        ρσ_setitem(hitbox, 7, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 7).axis, ρσ_getitem(hitPoint, 6).axis), pos: ρσ_getitem(hitPoint, 7).pos, opacity: visable})]));
+        "799";
+        hitboxOP = ρσ_list_decorate([]);
+        "800";
+        ρσ_setitem(hitboxOP, 0, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 3).axis, ρσ_getitem(hitPoint, 0).axis), pos: ρσ_getitem(hitPoint, 0).pos, opacity: visable})]));
+        "801";
+        ρσ_setitem(hitboxOP, 1, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 0).axis, ρσ_getitem(hitPoint, 1).axis), pos: ρσ_getitem(hitPoint, 1).pos, opacity: visable})]));
+        "802";
+        ρσ_setitem(hitboxOP, 2, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 1).axis, ρσ_getitem(hitPoint, 2).axis), pos: ρσ_getitem(hitPoint, 2).pos, opacity: visable})]));
+        "803";
+        ρσ_setitem(hitboxOP, 3, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 2).axis, ρσ_getitem(hitPoint, 3).axis), pos: ρσ_getitem(hitPoint, 3).pos, opacity: visable})]));
+        "805";
+        ρσ_setitem(hitboxOP, 4, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 4).axis, ρσ_getitem(hitPoint, 7).axis), pos: ρσ_getitem(hitPoint, 4).pos, opacity: visable})]));
+        "806";
+        ρσ_setitem(hitboxOP, 5, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 5).axis, ρσ_getitem(hitPoint, 4).axis), pos: ρσ_getitem(hitPoint, 5).pos, opacity: visable})]));
+        "807";
+        ρσ_setitem(hitboxOP, 6, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 6).axis, ρσ_getitem(hitPoint, 5).axis), pos: ρσ_getitem(hitPoint, 6).pos, opacity: visable})]));
+        "808";
+        ρσ_setitem(hitboxOP, 7, ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({axis: cross(ρσ_getitem(hitPoint, 7).axis, ρσ_getitem(hitPoint, 6).axis), pos: ρσ_getitem(hitPoint, 7).pos, opacity: visable})]));
+        "810";
+        bridge1 = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(0, 22.5, 0), size: vector(7, 15, 10)})]);
+        "811";
+        bridge2 = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: vec(0, 35, 0), size: vector(10, 10, 30)})]);
+        "816";
+        edges = compound(ρσ_list_decorate([ lineA1, lineA2, lineA3, lineA4, lineC1, lineC2, lineC3, lineC4, frontRightL, leftFrontL, rightBackL, backLeftL ]));
+        "817";
+        edges.color = color.green;
+        "818";
+        ship = compound(ρσ_list_decorate([ topFront, botFront, topBack, botBack, bridge1, bridge2, edges, salvo, salvo2 ]));
+        "819";
+        shadow = compound(ρσ_list_decorate([ topFront, botFront, topBack, botBack, bridge1, bridge2, salvo, salvo2 ]));
+        "820";
+        shadow.opacity = .3;
+        "821";
+        visableAxis = 0;
+        "822";
+        shipX = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pd["-"](1["*"](pb)), radius: visableAxis})]);
+        "823";
+        shipY = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pb, axis: pc["-"](1["*"](pa)), radius: visableAxis})]);
+        "824";
+        shipZ = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pe, axis: pf["-"](1["*"](pe)), radius: visableAxis})]);
+        "825";
+        collisionPoint = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: pe, radius: visableAxis})]);
+        "827";
+        ship.pos=ship.pos["+"](vector(1["-u"]()["*"](500), 0, 0));
+        "828";
+        shadow.pos = ship.pos;
+        "829";
+        for (var ρσ_Index31 = 0; ρσ_Index31["<"](4); ρσ_Index31++) {
+            i = ρσ_Index31;
+            "830";
+            ρσ_getitem(intTor, i).pos=ρσ_getitem(intTor, i).pos["+"](vec(1["-u"]()["*"](500), 0, 0));
+        }
+        "831";
+        for (var ρσ_Index32 = 0; ρσ_Index32["<"](8); ρσ_Index32++) {
+            i = ρσ_Index32;
+            "832";
+            ρσ_getitem(hitbox, i).pos=ρσ_getitem(hitbox, i).pos["+"](vec(1["-u"]()["*"](500), 0, 0));
+        }
+        "833";
+        collisionPoint.pos=collisionPoint.pos["+"](vec(1["-u"]()["*"](500), 0, 0));
+        "834";
+        ship.texture = textures.metal;
+        "835";
+        shadow.texture = textures.metal;
+        "839";
+        edges.color = color.red;
+        "840";
+        shipOP = compound(ρσ_list_decorate([ topFront, botFront, topBack, botBack, bridge1, bridge2, edges, salvo, salvo2 ]));
+        "841";
+        shadowOP = compound(ρσ_list_decorate([ topFront, botFront, topBack, botBack, bridge1, bridge2, salvo, salvo2 ]));
+        "842";
+        shadowOP.opacity = .3;
+        "843";
+        visableAxisOP = 0;
+        "844";
+        shipXOP = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pa, axis: pd["-"](1["*"](pb)), radius: visableAxisOP})]);
+        "845";
+        shipYOP = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pb, axis: pc["-"](1["*"](pa)), radius: visableAxisOP})]);
+        "846";
+        shipZOP = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pe, axis: pf["-"](1["*"](pe)), radius: visableAxisOP})]);
+        "847";
+        collisionPointOP = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: pe, radius: visableAxisOP})]);
+        "849";
+        shipOP.texture = textures.metal;
+        "850";
+        shadowOP.texture = textures.metal;
+        "853";
+        shipOP.pos=shipOP.pos["+"](vector(500, 0, 0));
+        "854";
+        ρσ_interpolate_kwargs.call(shipOP, shipOP.rotate, [ρσ_desugar_kwargs({angle: pi, axis: vector(shipYOP.axis), origin: shipOP.pos})]);
+        "855";
+        shadowOP.pos = shipOP.pos;
+        "856";
+        ρσ_interpolate_kwargs.call(shadowOP, shadowOP.rotate, [ρσ_desugar_kwargs({angle: pi, axis: vector(shipYOP.axis), origin: shipOP.pos})]);
+        "857";
+        for (var ρσ_Index33 = 0; ρσ_Index33["<"](4); ρσ_Index33++) {
+            i = ρσ_Index33;
+            "859";
+            ρσ_getitem(intTorOP, i).pos=ρσ_getitem(intTorOP, i).pos["+"](vec(500, 0, 0));
+            "860";
+            (ρσ_expr_temp = ρσ_getitem(intTorOP, i), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi, axis: vector(shipYOP.axis), origin: shipOP.pos})]));
+        }
+        "861";
+        for (var ρσ_Index34 = 0; ρσ_Index34["<"](8); ρσ_Index34++) {
+            i = ρσ_Index34;
+            "863";
+            ρσ_getitem(hitboxOP, i).pos=ρσ_getitem(hitboxOP, i).pos["+"](vec(500, 0, 0));
+            "864";
+            (ρσ_expr_temp = ρσ_getitem(hitboxOP, i), ρσ_interpolate_kwargs.call(ρσ_expr_temp, ρσ_expr_temp.rotate, [ρσ_desugar_kwargs({angle: pi, axis: vector(shipYOP.axis), origin: shipOP.pos})]));
+        }
+        "865";
+        collisionPointOP.pos=collisionPointOP.pos["+"](vec(500, 0, 0));
+        "866";
+        ρσ_interpolate_kwargs.call(collisionPointOP, collisionPointOP.rotate, [ρσ_desugar_kwargs({angle: pi, axis: vector(shipYOP.axis), origin: shipOP.pos})]);
+        "868";
+        for (var ρσ_Index35 = 0; ρσ_Index35["<"](8); ρσ_Index35++) {
+            i = ρσ_Index35;
+            "869";
+            ρσ_getitem(hitbox, i).axis.x = round(ρσ_getitem(hitbox, i).axis.x);
+            "870";
+            ρσ_getitem(hitbox, i).axis.y = round(ρσ_getitem(hitbox, i).axis.y);
+            "871";
+            ρσ_getitem(hitbox, i).axis.z = round(ρσ_getitem(hitbox, i).axis.z);
+        }
+        "872";
+        for (var ρσ_Index36 = 0; ρσ_Index36["<"](8); ρσ_Index36++) {
+            i = ρσ_Index36;
+            "873";
+            ρσ_getitem(hitboxOP, i).axis.x = round(ρσ_getitem(hitboxOP, i).axis.x);
+            "874";
+            ρσ_getitem(hitboxOP, i).axis.y = round(ρσ_getitem(hitboxOP, i).axis.y);
+            "875";
+            ρσ_getitem(hitboxOP, i).axis.z = round(ρσ_getitem(hitboxOP, i).axis.z);
+        }
+        "880";
+        space = "https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
+        "883";
+        space1 = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(1e4, 1e4, 1), pos: vec(0, 0, 1["-u"]()["*"](5e3)), texture: space})]);
+        "884";
+        space2 = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(1e4, 1, 1e4), pos: vec(0, 1["-u"]()["*"](5e3), 0), texture: space})]);
+        "885";
+        space3 = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(1, 1e4, 1e4), pos: vec(1["-u"]()["*"](5e3), 0, 0), texture: space})]);
+        "886";
+        space4 = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(1e4, 1e4, 1), pos: vec(0, 0, 5e3), texture: space})]);
+        "887";
+        space5 = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(1e4, 1, 1e4), pos: vec(0, 5e3, 0), texture: space})]);
+        "888";
+        space6 = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({size: vec(1, 1e4, 1e4), pos: vec(5e3, 0, 0), texture: space})]);
+        "891";
+        tor = ρσ_list_decorate([]);
+        "892";
+        for (var ρσ_Index37 = 0; ρσ_Index37["<"](100); ρσ_Index37++) {
+            i = ρσ_Index37;
+            "893";
+            shaft = ρσ_interpolate_kwargs.call(this, ellipsoid, [ρσ_desugar_kwargs({length: 20, width: 2.5, height: 2.5, color: vec(.7, .7, .7)})]);
+            "894";
+            flair = ρσ_interpolate_kwargs.call(this, pyramid, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 0, 0), size: vector(5, 2.5, 2.5), color: vec(.7, .7, .7)})]);
+            "895";
+            fire1 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 0, 0), radius: .5, color: color.red})]);
+            "896";
+            fire2 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), .5, .5), radius: .5, color: color.red})]);
+            "897";
+            fire3 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 1["-u"]()["*"](.5), .5), radius: .5, color: color.red})]);
+            "898";
+            fire4 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), .5, 1["-u"]()["*"](.5)), radius: .5, color: color.red})]);
+            "899";
+            fire5 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](10), 1["-u"]()["*"](.5), 1["-u"]()["*"](.5)), radius: .5, color: color.red})]);
+            "900";
+            ρσ_setitem(tor, i, compound(ρσ_list_decorate([ shaft, flair, fire1, fire2, fire3, fire4, fire5 ])));
+            "901";
+            ρσ_getitem(tor, i).pos = vec(5e3, 0, 0);
+        }
+        "904";
+        scene.camera.axis = vec(0, 0, 1["-u"]()["*"](1e3));
+        "905";
+        scene.center = shipOP.pos["+"](ship.pos)["/"](2);
+        "907";
+        while (true) {
+            "909";
+            turn=turn["+"](1);
+            "910";
+            turnMaxX = 0;
+            "911";
+            turnMaxY = 0;
+            "912";
+            turnOrder.text = "Round "["+"](turn)["+"](": Player 1");
+            "915";
+            scene.camera.axis = vec(0, 0, 1["-u"]()["*"](1e3));
+            "916";
+            scene.center = shipOP.pos["+"](ship.pos)["/"](2);
+            "917";
+            choice = 1;
+            "918";
+            while (true) {
+                "919";
+                (await rate(100));
+                "920";
+                k = (await keysdown());
+                "922";
+                if (ρσ_in("w", k)) {
+                    "923";
+                    if (turnMaxX["<"](turningMax)) {
+                        "924";
+                        (await turning(1, ship, shipX, shipZ, shadow, shipX, intTor, hitbox, collisionPoint));
+                        "925";
+                        turnMaxX=turnMaxX["+"](1);
+                        "926";
+                    }
+                }
+                if (ρσ_in("s", k)) {
+                    "927";
+                    if (turnMaxX[">"](1["-u"]()["*"](turningMax))) {
+                        "928";
+                        (await turning(1["-u"]()["*"](1), ship, shipX, shipZ, shadow, shipX, intTor, hitbox, collisionPoint));
+                        "929";
+                        turnMaxX=turnMaxX["-"](1);
+                        "930";
+                    }
+                }
+                if (ρσ_in("a", k)) {
+                    "931";
+                    if (turnMaxY["<"](turningMax)) {
+                        "932";
+                        (await turning(1["-u"]()["*"](1), ship, shipX, shipZ, shadow, shipY, intTor, hitbox, collisionPoint));
+                        "933";
+                        turnMaxY=turnMaxY["+"](1);
+                        "934";
+                    }
+                }
+                if (ρσ_in("d", k)) {
+                    "935";
+                    if (turnMaxY[">"](1["-u"]()["*"](turningMax))) {
+                        "936";
+                        (await turning(1, ship, shipX, shipZ, shadow, shipY, intTor, hitbox, collisionPoint));
+                        "937";
+                        turnMaxY=turnMaxY["-"](1);
+                        "938";
+                    }
+                }
+                if (ρσ_in("q", k)) {
+                    "939";
+                    (await scene.waitfor("keyup"));
+                    "940";
+                    if (choice[">"](1)) {
+                        "941";
+                        choice=choice["-"](1);
+                        "942";
+                    }
+                }
+                if (ρσ_in("e", k)) {
+                    "943";
+                    (await scene.waitfor("keyup"));
+                    "944";
+                    if (choice["<"](2)) {
+                        "945";
+                        choice=choice["+"](1);
+                    }
+                }
+                "946";
+                (await select(choice, attack, reload));
+                "947";
+                (await distance(k, shadow, ship, shipZ, 1["-u"]()["*"](1)));
+                "948";
+                if ((torTracker === 0 || typeof torTracker === "object" && ρσ_equals(torTracker, 0)) && (choice === 1 || typeof choice === "object" && ρσ_equals(choice, 1))) {
+                    "949";
+                    (await scrollText(torCount, "Out Of Ammo"));
+                    "950";
+                    choice = 2;
+                    "951";
+                } else if (ρσ_in("\n", k)) {
+                    "952";
+                    (await scene.waitfor("keyup"));
+                    "953";
+                    turnOrder.text = "loading...";
+                    "954";
+                    hit = (await traverse(ship, shipOP, shadow, intTor, hitbox, hitboxOP, turn, hit, hitPointsTitle, hitPoints, collisionPoint));
+                    "955";
+                    if ((choice === 1 || typeof choice === "object" && ρσ_equals(choice, 1))) {
+                        "956";
+                        (await torpedo(tor, intTor, 0, torCount));
+                        "957";
+                        torTracker=torTracker["-"](1);
+                        "958";
+                        torCount.text = ρσ_getitem(torDisplay, torTracker);
+                        "959";
+                    } else if ((choice === 2 || typeof choice === "object" && ρσ_equals(choice, 2))) {
+                        "960";
+                        torTracker = 5;
+                        "961";
+                        torCount.text = ρσ_getitem(torDisplay, torTracker);
+                    }
+                    "962";
+                    hitOP = (await torMovement(0, hitbox, hitboxOP, ship, shipOP, hitOP));
+                    "963";
+                    if (hitOP["<"](0)) {
+                        "964";
+                        hitOP=hitOP["*"](1["-u"]()["*"](1));
+                        "965";
+                        hitOP=hitOP["-"](1);
+                        "966";
+                        hit=hit["+"](1);
+                        "967";
+                        hit = (await HP(hit, hitPointsTitle, hitPoints));
+                    }
+                    "968";
+                    break;
+                    "969";
+                }
+            }
+            if ((hitOP === 5 || typeof hitOP === "object" && ρσ_equals(hitOP, 5))) {
+                "970";
+                (await scrollText(turnOrder, "Game Over: Player 1 wins"));
+                "971";
+                winner = "Winner: Player 1/Green";
+                "972";
+                break;
+            }
+            "974";
+            turnOrder.text = "Round "["+"](turn)["+"](": Player 2");
+            "977";
+            scene.camera.axis = vec(0, 0, 1["-u"]()["*"](1e3));
+            "978";
+            scene.center = shipOP.pos["+"](ship.pos)["/"](2);
+            "979";
+            choice = 1;
+            "982";
+            turnMaxXOP = 0;
+            "983";
+            turnMaxYOP = 0;
+            "984";
+            while (true) {
+                "985";
+                (await rate(100));
+                "986";
+                k = (await keysdown());
+                "988";
+                if (ρσ_in("w", k)) {
+                    "989";
+                    if (turnMaxXOP["<"](turningMax)) {
+                        "990";
+                        (await turning(1["-u"]()["*"](1), shipOP, shipXOP, shipZOP, shadowOP, shipXOP, intTorOP, hitboxOP, collisionPointOP));
+                        "991";
+                        turnMaxXOP=turnMaxXOP["+"](1);
+                        "992";
+                    }
+                }
+                if (ρσ_in("s", k)) {
+                    "993";
+                    if (turnMaxXOP[">"](1["-u"]()["*"](turningMax))) {
+                        "994";
+                        (await turning(1, shipOP, shipXOP, shipZOP, shadowOP, shipXOP, intTorOP, hitboxOP, collisionPointOP));
+                        "995";
+                        turnMaxXOP=turnMaxXOP["-"](1);
+                        "996";
+                    }
+                }
+                if (ρσ_in("a", k)) {
+                    "997";
+                    if (turnMaxYOP["<"](turningMax)) {
+                        "998";
+                        (await turning(1["-u"]()["*"](1), shipOP, shipXOP, shipZOP, shadowOP, shipYOP, intTorOP, hitboxOP, collisionPointOP));
+                        "999";
+                        turnMaxYOP=turnMaxYOP["+"](1);
+                        "1000";
+                    }
+                }
+                if (ρσ_in("d", k)) {
+                    "1001";
+                    if (turnMaxYOP[">"](1["-u"]()["*"](turningMax))) {
+                        "1002";
+                        (await turning(1, shipOP, shipXOP, shipZOP, shadowOP, shipYOP, intTorOP, hitboxOP, collisionPointOP));
+                        "1003";
+                        turnMaxYOP=turnMaxYOP["-"](1);
+                        "1004";
+                    }
+                }
+                if (ρσ_in("q", k)) {
+                    "1005";
+                    (await scene.waitfor("keyup"));
+                    "1006";
+                    if (choice[">"](1)) {
+                        "1007";
+                        choice=choice["-"](1);
+                        "1008";
+                    }
+                }
+                if (ρσ_in("e", k)) {
+                    "1009";
+                    (await scene.waitfor("keyup"));
+                    "1010";
+                    if (choice["<"](2)) {
+                        "1011";
+                        choice=choice["+"](1);
+                    }
+                }
+                "1012";
+                (await select(choice, attackOP, reloadOP));
+                "1013";
+                (await distance(k, shadowOP, shipOP, shipZOP, 1));
+                "1014";
+                if ((torTrackerOP === 0 || typeof torTrackerOP === "object" && ρσ_equals(torTrackerOP, 0)) && (choice === 1 || typeof choice === "object" && ρσ_equals(choice, 1))) {
+                    "1015";
+                    (await scrollText(torCountOP, "Out Of Ammo"));
+                    "1016";
+                    choice = 2;
+                    "1017";
+                } else if (ρσ_in("\n", k)) {
+                    "1018";
+                    (await scene.waitfor("keyup"));
+                    "1019";
+                    turnOrder.text = "loading...";
+                    "1020";
+                    hitOP = (await traverse(shipOP, ship, shadowOP, intTorOP, hitboxOP, hitbox, turn, hitOP, hitPointsTitleOP, hitPointsOP, collisionPointOP));
+                    "1021";
+                    if ((choice === 1 || typeof choice === "object" && ρσ_equals(choice, 1))) {
+                        "1022";
+                        (await torpedo(tor, intTorOP, 1, torCountOP));
+                        "1023";
+                        torTrackerOP=torTrackerOP["-"](1);
+                        "1024";
+                        torCountOP.text = ρσ_getitem(torDisplay, torTrackerOP);
+                        "1025";
+                    } else if ((choice === 2 || typeof choice === "object" && ρσ_equals(choice, 2))) {
+                        "1026";
+                        torTrackerOP = 5;
+                        "1027";
+                        torCountOP.text = ρσ_getitem(torDisplay, torTrackerOP);
+                    }
+                    "1028";
+                    hit = (await torMovement(1, hitbox, hitboxOP, ship, shipOP, hit));
+                    "1029";
+                    if (hit["<"](0)) {
+                        "1030";
+                        hit=hit["*"](1["-u"]()["*"](1));
+                        "1031";
+                        hit=hit["-"](1);
+                        "1032";
+                        hitOP=hitOP["+"](1);
+                        "1033";
+                        hitOP = (await HP(hitOP, hitPointsTitleOP, hitPointsOP));
+                    }
+                    "1034";
+                    break;
+                    "1035";
+                }
+            }
+            if ((hit === 5 || typeof hit === "object" && ρσ_equals(hit, 5))) {
+                "1036";
+                (await scrollText(turnOrder, "Game Over: Player 2 wins"));
+                "1037";
+                winner = "Winner: Player 2/Red";
+                "1038";
+                break;
+            }
+        }
+        "1039";
+        scene.visible = false;
+        "1040";
+        scene.remove();
+        "1041";
+        return winner;
+    };
+    if (!game.__argnames__) Object.defineProperties(game, {
+        __argnames__ : {value: ["winner"]},
+        __module__ : {value: null}
+    });
+
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
